@@ -1,5 +1,6 @@
 package com.shell;
 
+import io.github.pixee.security.SystemCommand;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,7 +22,7 @@ public class ShellCommand extends Activity {
 
 	private String runShellCommand() {
 		try {
-			Process process = Runtime.getRuntime().exec("/system/bin/ps");
+			Process process = SystemCommand.runCommand(Runtime.getRuntime(), "/system/bin/ps");
 			InputStreamReader reader = new InputStreamReader(process.getInputStream());
 			BufferedReader bufferedReader = new BufferedReader(reader);
 		    int numRead;
