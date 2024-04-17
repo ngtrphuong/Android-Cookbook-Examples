@@ -1,5 +1,6 @@
 package com.androidcookbook.filesystemdemos;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.*;
 
 import android.app.Activity;
@@ -34,7 +35,7 @@ public class MainActivity extends Activity {
 		println("Our private dir is " + where.getAbsolutePath());
 
 		try (BufferedReader is = new BufferedReader(new InputStreamReader(openFileInput(DATA_FILE_NAME)))) {
-			String line = is.readLine();
+			String line = BoundedLineReader.readLine(is, 5_000_000);
 			println("Read the string " + line);
 		} catch (IOException e) {
 			println("Failed to read back " + DATA_FILE_NAME + " due to " + e);
