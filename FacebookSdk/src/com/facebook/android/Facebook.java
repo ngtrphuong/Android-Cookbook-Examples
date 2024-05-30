@@ -603,7 +603,7 @@ public class Facebook {
         parameters.putString("display", "touch");
         parameters.putString("redirect_uri", REDIRECT_URI);
 
-        if (action.equals(LOGIN)) {
+        if (LOGIN.equals(action)) {
             parameters.putString("type", "user_agent");
             parameters.putString("client_id", mAppId);
         } else {

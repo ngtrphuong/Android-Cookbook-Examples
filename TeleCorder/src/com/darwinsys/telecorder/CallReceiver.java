@@ -32,7 +32,7 @@ public class CallReceiver extends BroadcastReceiver {
 		final String action = intent.getAction();
 		Log.d(TAG, "TeleCorder.CallReceiver.onReceive(): action = " + action);
 		Bundle bundle = intent.getExtras();
-		if (action.equals("android.intent.action.PHONE_STATE")) {		// INCOMING (or outgoing hangup)
+		if ("android.intent.action.PHONE_STATE".equals(action)) {		// INCOMING (or outgoing hangup)
 			boolean wasRinging = false;
 			if (bundle != null) {
 				String state = bundle.getString(TelephonyManager.EXTRA_STATE);

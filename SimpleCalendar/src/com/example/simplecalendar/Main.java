@@ -267,11 +267,11 @@ public class Main extends Activity implements OnClickListener
 						gridcell.setText(day_color[0]);
 						gridcell.setTag(day_color[0] + "-" + day_color[2] + "-" + day_color[3]);
 
-						if (day_color[1].equals("GREY"))
+						if ("GREY".equals(day_color[1]))
 							{
 								gridcell.setTextColor(Color.LTGRAY);
 							}
-						if (day_color[1].equals("WHITE"))
+						if ("WHITE".equals(day_color[1]))
 							{
 								gridcell.setTextColor(Color.WHITE);
 							}

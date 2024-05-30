@@ -141,7 +141,7 @@ public final class Util {
 
         OutputStream os;
 
-        if (method.equals("GET")) {
+        if ("GET".equals(method)) {
             url = url + "?" + encodeUrl(params);
         }
         Log.d("Facebook-Util", method + " URL: " + url);
@@ -149,7 +149,7 @@ public final class Util {
             (HttpURLConnection) new URL(url).openConnection();
         conn.setRequestProperty("User-Agent", System.getProperties().
                 getProperty("http.agent") + " FacebookAndroidSDK");
-        if (!method.equals("GET")) {
+        if (!"GET".equals(method)) {
             Bundle dataparams = new Bundle();
             for (String key : params.keySet()) {
                 if (params.getByteArray(key) != null) {

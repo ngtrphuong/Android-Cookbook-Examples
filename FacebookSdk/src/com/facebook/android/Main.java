@@ -252,7 +252,7 @@ public class Main extends Activity implements OnClickListener
 				@Override
 				public void onComplete(final String response, final Object state)
 					{
-						if (response.equals("true"))
+						if ("true".equals(response))
 							{
 								Log.d("Facebook-Example", "Successfully deleted wall post");
 								Main.this.runOnUiThread(new Runnable()

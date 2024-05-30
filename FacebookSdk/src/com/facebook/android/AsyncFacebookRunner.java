@@ -81,7 +81,7 @@ public class AsyncFacebookRunner {
             @Override public void run() {
                 try {
                     String response = fb.logout(context);
-                    if (response.length() == 0 || response.equals("false")){
+                    if (response.length() == 0 || "false".equals(response)){
                         listener.onFacebookError(new FacebookError(
                                 "auth.expireSession failed"), state);
                         return;

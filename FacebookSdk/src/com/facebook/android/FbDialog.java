@@ -130,7 +130,7 @@ public class FbDialog extends Dialog
 									{
 										mListener.onComplete(values);
 									}
-								else if (error.equals("access_denied") || error.equals("OAuthAccessDeniedException"))
+								else if ("access_denied".equals(error) || "OAuthAccessDeniedException".equals(error))
 									{
 										mListener.onCancel();
 									}
