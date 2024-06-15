@@ -2,6 +2,7 @@ package com.darwinsys.telecorder;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -83,7 +84,7 @@ public class CallReceiver extends BroadcastReceiver {
 		String file_name = 
 				"Record" + new SimpleDateFormat("yyyy-MM-dd-hh-mm-SS", Locale.US).format(new Date());
 		try {
-			audiofile = File.createTempFile(file_name, ".amr", sampleDir);
+			audiofile = Files.createTempFile(sampleDir.toPath(), file_name, ".amr").toFile();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
