@@ -19,6 +19,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.darwinsys.net.ConversationURL;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -176,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         // Now we have to fetch the list of Tasks for this user
         try {
             URL url =
-                new URL("https://www.googleapis.com/tasks/v1/users/@me/lists/@default/tasks?key=" + our_api_key);
+                Urls.create("https://www.googleapis.com/tasks/v1/users/@me/lists/@default/tasks?key=" + our_api_key, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             Map<String,String> headers = new HashMap<>();
             headers.put("accept", "text/json");
             headers.put("authorization", "OAuth " + authToken);
