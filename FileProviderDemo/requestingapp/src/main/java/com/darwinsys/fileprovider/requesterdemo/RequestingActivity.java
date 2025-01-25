@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class RequestingActivity extends AppCompatActivity {
                     String line;
                     TextView fileViewTextArea = (TextView) findViewById(R.id.fileView);
                     fileViewTextArea.setText(""); // reset each time
-                    while ((line = br.readLine()) != null) {
+                    while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                         fileViewTextArea.append(line);
                         fileViewTextArea.append("\n");
                     }
