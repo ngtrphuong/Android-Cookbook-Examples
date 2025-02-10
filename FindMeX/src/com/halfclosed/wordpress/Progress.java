@@ -1,5 +1,7 @@
 package com.halfclosed.wordpress;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -159,8 +161,8 @@ public class Progress extends Activity {
                 
                 /* Get search results as JSON*/
                 try {
-                    URL url = new  URL("http://ajax.googleapis.com/ajax/services/search/local?v=1.0&q="
-                                        + URLEncoder.encode(query, "UTF-8"));
+                    URL url = Urls.create("http://ajax.googleapis.com/ajax/services/search/local?v=1.0&q="
+                                        + URLEncoder.encode(query, "UTF-8"), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     
                     BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                     String inputLine;
@@ -240,11 +242,11 @@ public class Progress extends Activity {
                             /* Find the distance between you and the location */
                             responseBuilder = new StringBuilder();
                             try {
-                                URL url = new  URL("http://maps.google.com/maps/api/directions/json?origin=" 
+                                URL url = Urls.create("http://maps.google.com/maps/api/directions/json?origin=" 
                                                     + lat + "," + longi
                                                     + "&destination="
                                                     + myLocation[0] + "," + myLocation[1]
-                                                    + "&sensor=false");
+                                                    + "&sensor=false", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                                 Log.d("URL", url.toString());
                                 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                                 String inputLine;

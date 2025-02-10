@@ -1,5 +1,7 @@
 package com.pfizer.android;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -109,7 +111,7 @@ public class AndroidRss extends Activity {
 			URL feedUrl;
 			try {
 				Log.d("DEBUG", "Entered:" + rss);
-				feedUrl = new URL(rss[0]);
+				feedUrl = Urls.create(rss[0], Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException("Invalid URL, try again");
 			}
