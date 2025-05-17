@@ -1,5 +1,7 @@
 package com.darwinsys;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -48,7 +50,7 @@ public class GcmMockServer {
 
 	private static void sendMessage(String postUrl, String[][] messageHeaders,
 			String jsonMessage) throws IOException {
-		HttpURLConnection conn = (HttpURLConnection) new URL(postUrl).openConnection();
+		HttpURLConnection conn = (HttpURLConnection) Urls.create(postUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
 		for (String[] h : messageHeaders) {
 			conn.setRequestProperty(h[0], h[1]);
 		}
