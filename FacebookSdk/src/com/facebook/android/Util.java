@@ -16,6 +16,8 @@
 
 package com.facebook.android;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -110,7 +112,7 @@ public final class Util {
         // hack to prevent MalformedURLException
         url = url.replace("fbconnect", "http");
         try {
-            URL u = new URL(url);
+            URL u = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             Bundle b = decodeUrl(u.getQuery());
             b.putAll(decodeUrl(u.getRef()));
             return b;
@@ -146,7 +148,7 @@ public final class Util {
         }
         Log.d("Facebook-Util", method + " URL: " + url);
         HttpURLConnection conn =
-            (HttpURLConnection) new URL(url).openConnection();
+            (HttpURLConnection) Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
         conn.setRequestProperty("User-Agent", System.getProperties().
                 getProperty("http.agent") + " FacebookAndroidSDK");
         if (!method.equals("GET")) {

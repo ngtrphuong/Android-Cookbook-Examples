@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -68,7 +70,7 @@ public class MainActivity extends Activity {
 
                 if (!outputFile.exists()) {
                     notifyFromBackground("Downloading...");
-                    URL url = new URL(apkUrl);
+                    URL url = Urls.create(apkUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     HttpURLConnection c = (HttpURLConnection) url.openConnection();
                     c.setDoOutput(true);
                     c.connect();
