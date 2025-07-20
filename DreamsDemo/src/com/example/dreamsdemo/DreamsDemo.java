@@ -1,5 +1,6 @@
 package com.example.dreamsdemo;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 import android.animation.TimeAnimator;
@@ -18,7 +19,7 @@ public class DreamsDemo extends DreamService {
 
 	final static int YINCR = 2;
 	final static int POINT_SIZE = 18;
-	private static final Random RANDOM = new Random();
+	private static final Random RANDOM = new SecureRandom();
 	String[] data;
 	
 	@Override
