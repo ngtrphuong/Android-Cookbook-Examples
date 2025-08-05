@@ -16,6 +16,7 @@
 
 package com.facebook.android;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -208,7 +209,7 @@ public final class Util {
     private static String read(InputStream in) throws IOException {
         StringBuilder sb = new StringBuilder();
         BufferedReader r = new BufferedReader(new InputStreamReader(in), 1000);
-        for (String line = r.readLine(); line != null; line = r.readLine()) {
+        for (String line = BoundedLineReader.readLine(r, 5_000_000); line != null; line = BoundedLineReader.readLine(r, 5_000_000)) {
             sb.append(line);
         }
         in.close();
