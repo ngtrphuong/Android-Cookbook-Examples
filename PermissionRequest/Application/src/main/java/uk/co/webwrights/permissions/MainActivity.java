@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -186,7 +187,7 @@ public class MainActivity extends AppCompatActivity
         // Check we can read the file
         BufferedReader br = new BufferedReader(new FileReader(testFile));
         try {
-            String s = br.readLine();
+            String s = BoundedLineReader.readLine(br, 5_000_000);
             br.close();
         } catch (IOException e) {
             e.printStackTrace();

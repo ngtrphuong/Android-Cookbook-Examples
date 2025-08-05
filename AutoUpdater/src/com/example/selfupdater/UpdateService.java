@@ -1,5 +1,6 @@
 package com.example.selfupdater;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -77,7 +78,7 @@ public class UpdateService extends IntentService {
 			BufferedReader win = 
 				new BufferedReader(new InputStreamReader(http.getInputStream()));
 			String line;
-			while ((line = win.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(win, 5_000_000)) != null) {
 				if (line.startsWith("404")) {
 					Log.d(TAG, line);
 					return -1;

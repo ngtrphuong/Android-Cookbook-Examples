@@ -1,5 +1,6 @@
 package com.halfclosed.wordpress;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -165,7 +166,7 @@ public class Progress extends Activity {
                     BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                     String inputLine;
                     
-                    while ((inputLine = in.readLine()) != null) {
+                    while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                         responseBuilder.append(inputLine);
                     }
                     
@@ -249,7 +250,7 @@ public class Progress extends Activity {
                                 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                                 String inputLine;
                                 
-                                while ((inputLine = in.readLine()) != null) {
+                                while ((inputLine = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                                     responseBuilder.append(inputLine);
                                 }
                                 
@@ -344,7 +345,7 @@ class HttpHelper {
             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder str = new StringBuilder();
             String line = null;
-            while((line = reader.readLine()) != null){
+            while((line = BoundedLineReader.readLine(reader, 5_000_000)) != null){
                 str.append(line + "\n");
             }
             in.close();
@@ -408,7 +409,7 @@ class CustomHttpClient {
             StringBuffer sb = new StringBuffer("");
             String line = "";
             String NL = System.getProperty("line.separator");
-            while ((line = in.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
                 sb.append(line + NL);
             }
             in.close();
